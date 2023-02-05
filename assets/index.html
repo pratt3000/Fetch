@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSV Upload and API Call Example</title>
+    <script>
+      function handleFileUpload() {
+        const input = document.getElementById("fileInput");
+        const file = input.files[0];
+
+        if (!file) {
+          alert("No file selected.");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        fetch("/submit", {
+          method: "POST",
+          body: formData
+        }).then(response => response.json())
+                .then(data => {
+            const table = document.getElementById("table");
+            table.style.display = "block";
+            for(var i = 0; i < 12; i++) {
+              var element = document.getElementById(i);
+              element.style.border = "1px solid black";
+              element.innerHTML = parseInt(data[i]);
+            }
+            const div_element = document.getElementById("images");
+            for(var i = 1; i <= 7; i++) {
+              var image = document.createElement("img");
+              image.src = `/image/${i}`;
+              image.id = `image_${i}`;
+              div_element.appendChild(image);
+            }})
+          .catch(error => {
+            console.error("Error making API call:", error);
+            alert("An error occurred while making the API call.");
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <input type="file" id="fileInput" accept=".csv">
+    <button onclick="handleFileUpload()">Upload CSV and Call API</button>
+    <div id="result"></div>
+    <table id="table" style="display: none">
+      <tr>
+        <th style="border: 1px solid black">Month</th>
+        <th style="border: 1px solid black">Predicted Number of Receipts for next year</th>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black">January</td>
+        <td id="0"></td>
+      </tr>
+        <tr>
+            <td style="border: 1px solid black">February</td>
+            <td id="1"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black">March</td>
+            <td id="2"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black">April</td>
+            <td id="3"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black">May</td>
+            <td id="4"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black">June</td>
+            <td id="5"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black">July</td>
+            <td id="6"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black">August</td>
+            <td id="7"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black">September</td>
+            <td id="8"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black">October</td>
+            <td id="9"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black">November</td>
+            <td id="10"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black">December</td>
+            <td id="11"></td>
+        </tr>
+    </table>
+    <div id="images">
+    </div>
+
+  </body>
+</html>

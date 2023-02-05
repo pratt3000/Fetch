@@ -1,0 +1,5 @@
+Pandas==1.5.3
+statsmodels==0.13.5
+numpy==1.24.1
+holidays==0.19
+Flask==2.2.2
