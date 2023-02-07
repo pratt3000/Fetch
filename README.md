@@ -5,6 +5,7 @@
 2. cd Fetch
 
 3. ```docker build . -t fetch_assignment:v0 && docker run -p 8080:80 fetch_assignment:v0```
+4. goto http://localhost:8080/index.html on your browser.
 
 This will open up a website where you can upload your own data and get the results. You'll also get to see some beautiful graphs!
 
